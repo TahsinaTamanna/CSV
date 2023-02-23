@@ -1,11 +1,11 @@
-# using the datetime module
-# adding dates for July 2018
+# handle error checking using try except
+# change file to use death_valley data
 
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
 
-infile = open('sitka_weather_2018_simple.csv', 'r')
+infile = open('death_valley_2018_simple.csv', 'r')
 csvfile = csv.reader(infile)
 
 header_row = next(csvfile)
@@ -17,15 +17,20 @@ highs =[]
 lows = []
 dates =[]
 
-#mydate = datetime.strptime('2018-07-01', '%Y-%m-%d')
-
 for row in csvfile:
-    highs.append(int(row[5]))
-    lows.append(int(row[6]))
-    thedate = datetime.strptime(row[2], '%Y-%m-%d')
-    dates.append(thedate)
+    try:
+        high = int(row[4])
+        low = int(row[5])
+        thedate = datetime.strptime(row[2], '%Y-%m-%d')
+    
+    except ValueError:
+        print(f"Missing data for {row[2]}")
 
-#print(highs)
+    else:
+        highs.append(high)
+        lows.append(low)
+        dates.append(thedate)
+   
 
 fig = plt.figure()
 
