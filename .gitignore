@@ -1,3 +1,6 @@
+.gitignore
 .vscode/
 csv_project/
 myvenv/
+exceptions.py
+csv_temps_1.py
